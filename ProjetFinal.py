@@ -31,6 +31,7 @@ class Personne(object):
         else:
             self.__prenom = value
 
+    #La méthode magique nommée "__str__".
     def __str__(self):
         return f'{self.set_nom}\n {self.set_prenom}'
 
@@ -47,4 +48,21 @@ class Employe(Personne):
 
     #les methodes d'acces
     #pour code
+    def get_code(self):
+        return self.__code
+
+    def set_code(self, value):
+        self.__code = value
+
+    #pour fonction
+    def get_fonction(self):
+        return self.__fonction
+
+    def set_fonction(self, value):
+        self.__fonction = value
+
+
+    #La méthode magique nommée "__str__".
+    def __str__(self):
+        return f'{super().__str__()}\n, {self.__code}\n, {self.__fonction}'
 
