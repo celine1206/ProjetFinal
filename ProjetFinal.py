@@ -148,3 +148,66 @@ class Reparation(object):
         self.__codeemploye = value
 
 
+#creation de la classe Voiture
+class Voiture(object):
+
+    #constructeur
+    def __init__(self, numeroplaque : str = 'AAA-AAA', marque : str = 'rien', modele : str = 'rien', couleur : str = 'rien', annee : int = 1111, proprietaire : Client = (), reparations : list[Reparation] = []):
+        self.set_numeroplaque(numeroplaque)
+        self.set_marque(marque)
+        self.set_modele(modele)
+        self.set_couleur(couleur)
+        self.set_annee(annee)
+        self.set_proprietaire(proprietaire)
+        self.set_reparations(reparations)
+
+    #les methodes d'acces
+    #pour numeroplaque
+    def get_numeroplaque(self):
+        return self.__numeroplaque
+
+    def set_numeroplaque(self, value):
+        self.__numeroplaque = value
+
+    #pour marque
+    def get_marque(self):
+        return self.__marque
+
+    def set_marque(self, value):
+        self.__marque = value
+
+    #pour modele
+    def get_modele(self):
+        return self.__modele
+
+    def set_modele(self, value):
+        self.__modele = value
+
+    #pour couleur
+    def get_couleur(self):
+        return self.__couleur
+
+    def set_couleur(self, value):
+        self.__couleur = value
+
+    #pour annee
+    def get_annee(self):
+        return self.__annee
+
+    def set_annee(self, value):
+        self.__annee = value
+
+    #pour proprietaire
+    def get_proprietaire(self):
+        return self.__proprietaire
+
+    def set_proprietaire(self, value: Client):
+        self.__proprietaire = value
+
+    #pour reparations
+    def get_reparations(self):
+        return self.__reparations
+
+    def set_reparations(self, value: Reparation):
+        self.__reparations = value
+
