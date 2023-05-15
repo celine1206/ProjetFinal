@@ -1,4 +1,7 @@
 import datetime
+from pathlib import Path
+import jsonpickle
+
 
 # cration de la classe Personne
 class Personne(object):
@@ -73,7 +76,7 @@ class Employe(Personne):
 class Client(Personne):
 
     #le constructeur
-    def __int__(self, nom : str, prenom : str, telephone : str, courriel : str):
+    def __int__(self, nom : str, prenom : str, telephone : str = '000-000-0000', courriel : str = 'personne@cegep.com'):
         super().__init__(nom, prenom) #appel du constructeur du parent
         #appel des methodes set
         self.set_telephone(telephone)
@@ -210,4 +213,99 @@ class Voiture(object):
 
     def set_reparations(self, value: Reparation):
         self.__reparations = value
+
+
+#cartion de la classe Garage
+class Garage(object):
+
+    #le constructeur
+    def __int__(self, nom : str = 'rien', adresse : str = 'rien', telephone : str = 'rien', employes : list[Employe] = [], voitures : list[Voiture] = []):
+        self.set_nom(nom)
+        self.set_adresse(adresse)
+        self.set_telephone(telephone)
+        self.set_employes(employes)
+        self.set_voitures(voitures)
+
+    #methodes d'acces
+    #pour nom
+    def get_nom(self):
+        return self.__nom
+
+    def set_nom(self, value):
+        self.__nom = value
+
+    #pour adresse
+    def get_adresse(self):
+        return self.__adresse
+
+    def set_adresse(self, value):
+        self.__adresse = value
+
+    #pour telephone
+    def get_telephone(self):
+        return self.__telephone
+
+    def set_telephone(self, value):
+        self.__telephone = value
+
+    #pour employes
+    def get_employes(self):
+        return self.__employes
+
+    def set_employes(self, value: Employe):
+        self.__employes = value
+
+    #pour voitures
+    def get_voitures(self):
+        return self.__voitures
+
+    def set_voitures(self, value: Voiture):
+        self.__voitures = value
+
+
+    #les methodes utilitaires
+    def ajoutervoiture(self, element : Voiture) -> None:
+        self.__voitures.append(element)
+
+    def getvoiture(self, numvoiture:str)->Voiture:
+        if Voiture.get_numeroplaque() == numvoiture:
+            return self.__voitures[numvoiture]
+
+    def ajouterreparation(self, numvoiture:str, reparation:Reparation)->None:
+        Voiture.get_reparations().append(numvoiture)
+
+    def getreparation(self, numvoiture:str)-> Reparation:
+        if Voiture.get_numeroplaque() == numvoiture:
+            return Voiture.get_reparations[numvoiture]
+
+
+
+class Fichier:
+    #methodes de la classe
+    #serialiser
+    @classmethod
+    def serialisergarage(cls, element: Garage, fichier: str)->None:
+        #creer le stream
+        path:Path = Path(fichier)
+        stream = path.open('w') #en ecriture
+        #serialiser l'enlement vers le fichier
+        strjson : str = jsonpickle.encode(element, indent=4, separators=(',', ':'))
+        stream.write(strjson)
+        #fermer le stream
+        stream.flush()
+        stream.close()
+
+    #deserialiser
+    @classmethod
+    def deserialisergarage(cls, fichier:str)->Garage:
+        #creer le stream
+        path:Path = Path(fichier)
+        stream = path.open('r') #en lecture
+        #deserialiser vers objet Garage
+        strjson = stream.read()
+        reponse : Garage = jsonpickle.decode(strjson)
+        #fermer le stream
+        stream.close()
+        #retourner la valeur
+        return reponse
 
