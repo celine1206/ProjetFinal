@@ -155,14 +155,14 @@ class Reparation(object):
 class Voiture(object):
 
     #constructeur
-    def __init__(self, numeroplaque : str = 'AAA-AAA', marque : str = 'rien', modele : str = 'rien', couleur : str = 'rien', annee : int = 1111, proprietaire : Client = (), reparations : list[Reparation] = []):
+    def __init__(self, numeroplaque : str = 'AAA-AAA', marque : str = 'rien', modele : str = 'rien', couleur : str = 'rien', annee : int = 1111, proprietaire : Client = ()):
         self.set_numeroplaque(numeroplaque)
         self.set_marque(marque)
         self.set_modele(modele)
         self.set_couleur(couleur)
         self.set_annee(annee)
         self.set_proprietaire(proprietaire)
-        self.set_reparations(reparations)
+        self.__reparations : list[Reparation] = []
 
     #les methodes d'acces
     #pour numeroplaque
@@ -219,12 +219,12 @@ class Voiture(object):
 class Garage(object):
 
     #le constructeur
-    def __int__(self, nom : str = 'rien', adresse : str = 'rien', telephone : str = 'rien', employes : list[Employe] = [], voitures : list[Voiture] = []):
+    def __int__(self, nom : str = 'rien', adresse : str = 'rien', telephone : str = 'rien'):
         self.set_nom(nom)
         self.set_adresse(adresse)
         self.set_telephone(telephone)
-        self.set_employes(employes)
-        self.set_voitures(voitures)
+        self.__employes : list [Employe] = []
+        self.__voitures : list [Voiture] = []
 
     #methodes d'acces
     #pour nom
